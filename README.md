@@ -41,14 +41,17 @@ The Assembly Line Scheduling algorithm computes:
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/osamaju/ITE_BID601_HW.git
+   ```
+2. **Open directory**:
+   ```bash
    cd ITE_BID601_HW
    ```
-2. **Install dependencies**:
+3. **Install dependencies**:
    Ensure you have Python 3 installed. Install Flask using:
    ```bash
    pip install flask
    ```
-3. **Run the application**:
+4. **Run the application**:
    Start the Flask development server:
    ```bash
    python app.py
