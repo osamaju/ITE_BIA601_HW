@@ -2,25 +2,22 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 def assembly_line_scheduling(n, a, t, e, x):
     """
-    Calculate the optimal time for assembly line scheduling.
-    
-    :param n: Number of stations.
-    :param a: List of station times (a[0] for Line 1, a[1] for Line 2).
-    :param t: List of transfer times (t[0] for Line 1, t[1] for Line 2).
-    :param e: List of entry times (e[0] for Line 1, e[1] for Line 2).
-    :param x: List of exit times (x[0] for Line 1, x[1] for Line 2).
-    :return: Optimal time, exit line, and path details.
+    Calculate the optimal time for assembly line scheduling:
+    -param n: Number of stations.
+    -param a: List of station times (a[0] for Line 1, a[1] for Line 2).
+    -param t: List of transfer times (t[0] for Line 1, t[1] for Line 2).
+    -param e: List of entry times (e[0] for Line 1, e[1] for Line 2).
+    -param x: List of exit times (x[0] for Line 1, x[1] for Line 2).
+    -return: Optimal time, exit line, and path details.
     """
     # Initialize arrays
     f1 = [0] * n
     f2 = [0] * n
     l1 = [0] * n
     l2 = [0] * n
-    
     # Entry times
     f1[0] = e[0] + a[0][0]
     f2[0] = e[1] + a[1][0]
-    
     # Calculate optimal time for each station
     for j in range(1, n):
         # Line 1
@@ -37,7 +34,6 @@ def assembly_line_scheduling(n, a, t, e, x):
         else:
             f2[j] = f1[j-1] + t[0][j-1] + a[1][j]
             l2[j] = 1
-    
     # Calculate final optimal time
     if f1[-1] + x[0] <= f2[-1] + x[1]:
         f_opt = f1[-1] + x[0]
@@ -45,7 +41,6 @@ def assembly_line_scheduling(n, a, t, e, x):
     else:
         f_opt = f2[-1] + x[1]
         l_opt = 2
-    
     # Build the optimal path with transfer details
     path = []
     l = l_opt
@@ -64,12 +59,10 @@ def assembly_line_scheduling(n, a, t, e, x):
     path.append(f"Line {l}, Station 1, Time = {a[l-1][0]}")
     path.append(f"Entry e{l} = {e[l-1]}")
     return f_opt, l_opt, path
-
 # Route for the home page
 @app.route('/')
 def home():
     return render_template('home.html')
-
 # Route for the input page
 @app.route('/input', methods=['GET', 'POST'])
 def input_page():
